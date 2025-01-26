@@ -34,9 +34,13 @@ Users upload an image (JPEG, PNG, or JPG) through a simple web form.
 The app:
 
 Reads the uploaded image.
-Resizes it to ensure better accuracy.
+
+Resizes it to ensure better accuracy
+
 Converts the image to RGB format (required by MediaPipe).
+
 Applies MediaPipe's Pose solution to detect pose landmarks.
+
 Draws the detected landmarks and connections on the image.
 
 3.Return the Processed Image:
@@ -48,7 +52,9 @@ Who Is This For?
 This project is ideal for:
 
 Developers learning about computer vision and pose estimation.
+
 People exploring MediaPipe for real-world applications.
+
 Beginners who want hands-on experience with Flask and OpenCV.
 
 How to Set Up and Run Locally
@@ -56,6 +62,7 @@ How to Set Up and Run Locally
 Prerequisites
 
 Python 3.8 or higher installed.
+
 Basic understanding of how to use a command line.
 
 Installation Steps
@@ -72,15 +79,20 @@ pip install -r requirements.txt
 Technologies Used
 
 Flask: A lightweight Python web framework for creating the web interface.
+
 OpenCV: A computer vision library used for image processing.
+
 MediaPipe: A robust library for detecting human poses and drawing landmarks.
+
 HTML: For building the user interface.
 
 
 Future Enhancements
 
 Add support for video pose detection.
+
 Integrate multiple pose models for comparison.
+
 Create a Dockerfile for easy containerization.
 
 Acknowledgements
