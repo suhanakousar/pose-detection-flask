@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pose Detection Upload</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+            text-align: center;
+            padding: 50px;
+            color: #444;
+        }
+        .container {
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0px 15px 30px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 500px;
+            margin: 0 auto;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .container:hover {
+            transform: translateY(-10px);
+            box-shadow: 0px 20px 40px rgba(0, 0, 0, 0.15);
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+        input[type="file"] {
+            padding: 12px;
+            margin: 15px 0;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.3s ease;
+        }
+        input[type="file"]:hover {
+            background-color: #0056b3;
+        }
+        .slider-container {
+            text-align: left;
+            margin: 20px 0;
+        }
+        .slider-container label {
+            font-size: 14px;
+            font-weight: 400;
+            color: #666;
+            display: block;
+            margin-bottom: 10px;
+        }
+        input[type="range"] {
+            -webkit-appearance: none;
+            width: 100%;
+            height: 8px;
+            border-radius: 5px;
+            background: linear-gradient(90deg, #007bff, #80d4ff);
+            outline: none;
+            transition: background 0.3s ease;
+        }
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #007bff;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        input[type="range"]::-webkit-slider-thumb:hover {
+            background: #0056b3;
+        }
+        .threshold-value {
+            font-size: 16px;
+            font-weight: 500;
+            color: #444;
+            text-align: center;
+            margin-top: 10px;
+        }
+        button {
+            padding: 12px 25px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+        button:hover {
+            background-color: #218838;
+            transform: scale(1.05);
+        }
+        .result {
+            margin-top: 30px;
+        }
+        img {
+            max-width: 100%;
+            border-radius: 12px;
+            margin-top: 20px;
+            transition: box-shadow 0.3s ease;
+        }
+        img:hover {
+            box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Upload an Image for Pose Detection</h1>
+        <form action="/upload" method="POST" enctype="multipart/form-data">
+            <input type="file" name="file" accept=".jpg,.jpeg,.png" required>
+            <div class="slider-container">
+                <label for="threshold">Detection Threshold:</label>
+                <input type="range" name="threshold" id="threshold" min="0.1" max="1.0" step="0.1" value="0.5" oninput="updateThresholdValue(this.value)">
+                <div class="threshold-value" id="thresholdValue">0.5</div>
+            </div>
+            <button type="submit">Upload</button>
+        </form>
+        <div class="result">
+            {% if result %}
+                <h3>Processed File:</h3>
+                <img src="{{ url_for('static', filename=result) }}" alt="Processed Image">
+            {% endif %}
+        </div>
+    </div>
+
+    <script>
+        function updateThresholdValue(value) {
+            document.getElementById('thresholdValue').innerText = value;
+        }
+    </script>
+</body>
+</html>
